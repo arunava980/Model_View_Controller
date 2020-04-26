@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MVC_Authenticate_AuthorizeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Dept">
+          <Key>
+            <PropertyRef Name="DId" />
+          </Key>
+          <Property Name="DId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DName" Type="varchar" MaxLength="50" />
+          <Property Name="HOD" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Emp">
+          <Key>
+            <PropertyRef Name="EId" />
+          </Key>
+          <Property Name="EId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EName" Type="varchar" MaxLength="50" />
+          <Property Name="Salary" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="DeptId" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Role" Type="char" MaxLength="1" />
+        </EntityType>
+        <Association Name="FK__tbl_Emp__DeptId__145C0A3F">
+          <End Role="tbl_Dept" Type="Self.tbl_Dept" Multiplicity="0..1" />
+          <End Role="tbl_Emp" Type="Self.tbl_Emp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Dept">
+              <PropertyRef Name="DId" />
+            </Principal>
+            <Dependent Role="tbl_Emp">
+              <PropertyRef Name="DeptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MVC_Authenticate_AuthorizeModelStoreContainer">
+          <EntitySet Name="tbl_Dept" EntityType="Self.tbl_Dept" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Emp" EntityType="Self.tbl_Emp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_User" EntityType="Self.tbl_User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tbl_Emp__DeptId__145C0A3F" Association="Self.FK__tbl_Emp__DeptId__145C0A3F">
+            <End Role="tbl_Dept" EntitySet="tbl_Dept" />
+            <End Role="tbl_Emp" EntitySet="tbl_Emp" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MVC_Authenticate_AuthorizeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Dept">
+          <Key>
+            <PropertyRef Name="DId" />
+          </Key>
+          <Property Name="DId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HOD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Emp" Relationship="Self.FK__tbl_Emp__DeptId__145C0A3F" FromRole="tbl_Dept" ToRole="tbl_Emp" />
+        </EntityType>
+        <EntityType Name="tbl_Emp">
+          <Key>
+            <PropertyRef Name="EId" />
+          </Key>
+          <Property Name="EId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DeptId" Type="Int32" />
+          <NavigationProperty Name="tbl_Dept" Relationship="Self.FK__tbl_Emp__DeptId__145C0A3F" FromRole="tbl_Emp" ToRole="tbl_Dept" />
+        </EntityType>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__tbl_Emp__DeptId__145C0A3F">
+          <End Role="tbl_Dept" Type="Self.tbl_Dept" Multiplicity="0..1" />
+          <End Role="tbl_Emp" Type="Self.tbl_Emp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Dept">
+              <PropertyRef Name="DId" />
+            </Principal>
+            <Dependent Role="tbl_Emp">
+              <PropertyRef Name="DeptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MVC_Authenticate_AuthorizeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Dept" EntityType="Self.tbl_Dept" />
+          <EntitySet Name="tbl_Emp" EntityType="Self.tbl_Emp" />
+          <EntitySet Name="tbl_User" EntityType="Self.tbl_User" />
+          <AssociationSet Name="FK__tbl_Emp__DeptId__145C0A3F" Association="Self.FK__tbl_Emp__DeptId__145C0A3F">
+            <End Role="tbl_Dept" EntitySet="tbl_Dept" />
+            <End Role="tbl_Emp" EntitySet="tbl_Emp" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MVC_Authenticate_AuthorizeModelStoreContainer" CdmEntityContainer="MVC_Authenticate_AuthorizeEntities">
+          <EntitySetMapping Name="tbl_Dept">
+            <EntityTypeMapping TypeName="MVC_Authenticate_AuthorizeModel.tbl_Dept">
+              <MappingFragment StoreEntitySet="tbl_Dept">
+                <ScalarProperty Name="DId" ColumnName="DId" />
+                <ScalarProperty Name="DName" ColumnName="DName" />
+                <ScalarProperty Name="HOD" ColumnName="HOD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Emp">
+            <EntityTypeMapping TypeName="MVC_Authenticate_AuthorizeModel.tbl_Emp">
+              <MappingFragment StoreEntitySet="tbl_Emp">
+                <ScalarProperty Name="EId" ColumnName="EId" />
+                <ScalarProperty Name="EName" ColumnName="EName" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_User">
+            <EntityTypeMapping TypeName="MVC_Authenticate_AuthorizeModel.tbl_User">
+              <MappingFragment StoreEntitySet="tbl_User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
